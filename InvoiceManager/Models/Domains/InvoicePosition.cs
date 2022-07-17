@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace InvoiceManager.Models.Domains
 {
@@ -6,8 +7,12 @@ namespace InvoiceManager.Models.Domains
     {
         public int Id { get; set; }
         public int No { get; set; }
+
+        [Display(Name = "Invoice")]
         public int InvoiceId { get; set; }
         public Decimal Value { get; set; }
+
+        [Display(Name = "Product")]
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 

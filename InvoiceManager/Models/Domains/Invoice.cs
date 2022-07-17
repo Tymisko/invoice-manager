@@ -20,10 +20,18 @@ namespace InvoiceManager.Models.Domains
         public string Title { get; set; }
 
         public decimal Value { get; set; }
+
+        [Display(Name = "Payment Method")]
         public int PaymentMethodId { get; set; }
+
+        [Display(Name = "Payment Date")]
         public DateTime PaymentDate { get; set; }
+
+        [Display(Name = "Created Date")]
         public DateTime CreatedDate { get; set; }
         public string Comments { get; set; }
+
+        [Display(Name = "Client")]
         public int CliendId { get; set; }
 
         [Required]

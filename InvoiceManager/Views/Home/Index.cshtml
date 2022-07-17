@@ -6,22 +6,47 @@
 
 <h1 class="mb-3">Invoices</h1>
 
-<button class="btn btn-primary mb-3" onclick="@Url.Action("Invoice", "Home")">Add</button>
+<button class="btn btn-primary mb-3"
+        onclick="@Url.Action("Invoice", "Home")">
+    Add
+</button>
 
 @if (Model != null && Model.Any())
 {
-    <table>
+    <table class="table table-hover table-striped mt-3 mb-5">
         <thead>
-        <tr>
-            <th>Title</th>
-            <th>Client</th>
-            <th>Value</th>
-            <th>Date</th>
-            <th>Payment Deadline</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Client</th>
+                <th scope="col">Value</th>
+                <th scope="col">Date</th>
+                <th scope="col">Payment Deadline</th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody>
+            @foreach (var invoice in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Invoice", "Home", 
+                                     new {Id = invoice.Id})">
+                            @invoice.Title
+                        </a>
+                        
+                    </td>
+                    <td>@invoice.Client.Name</td>
+                    <td>@invoice.Value $</td>
+                    <td>@invoice.CreatedDate.ToString("dd-MM-yyyy")</td>
+                    <td>@invoice.PaymentDate.ToString("dd-MM-yyyy")</td>
+                    <td>
+                        <button class="btn btn-danger tn-sm"
+                                onclick="deleteInvoice()">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }
@@ -30,4 +55,15 @@ else
     <div>
         <p>No invoices to display.</p>
     </div>
+}
+
+@section Scripts 
+{
+    <script type="text/javascript">
+        function deleteInvoice() {
+            if (confirm("Are you sure you want to delete this invoice?") === false)
+                return;
+
+        }
+    </script>    
 }
